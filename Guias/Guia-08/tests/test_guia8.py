@@ -99,24 +99,38 @@ class Guia8Tests(unittest.TestCase):
         self.assertEqual(len(valores), 100)
         self.assertEqual(set(valores), set(range(100)))
         carton = valores[0:12]
-        self.assertEqual(guia8.jugar_carton_de_bingo(carton, bolillero),
-                         max(valores.index(valor) for valor in carton) + 1)
+        self.assertEqual(
+            guia8.jugar_carton_de_bingo(carton, bolillero),
+            max(valores.index(valor) for valor in carton) + 1,
+        )
         self.assertEqual(cola_a_lista(bolillero), valores)
 
     def test_urgentes_clientes_y_diccionarios(self):
         pacientes = cola_desde([(1, "A", "x"), (4, "B", "y"), (3, "C", "z")])
         self.assertEqual(guia8.pacientes_urgentes(pacientes), 2)
-        clientes = cola_desde([("resto", 1, False, False), ("pref", 2, True, False),
-                               ("prior", 3, False, True), ("prior2", 4, True, True)])
+        clientes = cola_desde(
+            [
+                ("resto", 1, False, False),
+                ("pref", 2, True, False),
+                ("prior", 3, False, True),
+                ("prior2", 4, True, True),
+            ]
+        )
         salida = guia8.atencion_a_clientes(clientes)
-        self.assertEqual(cola_a_lista(salida), [("prior", 3, False, True),
-                                                 ("prior2", 4, True, True),
-                                                 ("pref", 2, True, False),
-                                                 ("resto", 1, False, False)])
+        self.assertEqual(
+            cola_a_lista(salida),
+            [
+                ("prior", 3, False, True),
+                ("prior2", 4, True, True),
+                ("pref", 2, True, False),
+                ("resto", 1, False, False),
+            ],
+        )
         notas = [("Sole", 9.5), ("Maxi", 8.0), ("Sole", 9.0)]
         self.assertEqual(guia8.promedio(notas, "Sole"), 9.25)
-        self.assertEqual(guia8.calcular_promedio_por_estudiante(notas),
-                         {"Sole": 9.25, "Maxi": 8.0})
+        self.assertEqual(
+            guia8.calcular_promedio_por_estudiante(notas), {"Sole": 9.25, "Maxi": 8.0}
+        )
 
     def test_historial_e_inventario(self):
         historiales = {}

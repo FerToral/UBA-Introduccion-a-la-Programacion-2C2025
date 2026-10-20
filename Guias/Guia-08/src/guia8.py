@@ -246,12 +246,16 @@ def promedio(notas: list[tuple[str, float]], estudiante: str) -> float:
     return sum(valores) / len(valores)
 
 
-def calcular_promedio_por_estudiante(notas: list[tuple[str, float]]) -> dict[str, float]:
+def calcular_promedio_por_estudiante(
+    notas: list[tuple[str, float]],
+) -> dict[str, float]:
     acumulados: dict[str, list[float]] = {}
     for estudiante, nota in notas:
         acumulados.setdefault(estudiante, []).append(nota)
-    return {estudiante: sum(valores) / len(valores)
-            for estudiante, valores in acumulados.items()}
+    return {
+        estudiante: sum(valores) / len(valores)
+        for estudiante, valores in acumulados.items()
+    }
 
 
 def visitar_sitio(historiales: dict[str, Pila], usuario: str, sitio: str) -> None:
@@ -262,24 +266,29 @@ def navegar_atras(historiales: dict[str, Pila], usuario: str) -> str:
     return historiales[usuario].get()
 
 
-def agregar_producto(inventario: dict[str, dict[str, int | float]], nombre: str,
-                     precio: float, cantidad: int) -> None:
+def agregar_producto(
+    inventario: dict[str, dict[str, int | float]],
+    nombre: str,
+    precio: float,
+    cantidad: int,
+) -> None:
     inventario[nombre] = {"precio": precio, "cantidad": cantidad}
 
 
-def actualizar_stock(inventario: dict[str, dict[str, int | float]], nombre: str,
-                     cantidad: int) -> None:
+def actualizar_stock(
+    inventario: dict[str, dict[str, int | float]], nombre: str, cantidad: int
+) -> None:
     inventario[nombre]["cantidad"] = cantidad
 
 
-def actualizar_precio(inventario: dict[str, dict[str, int | float]], nombre: str,
-                      precio: float) -> None:
+def actualizar_precio(
+    inventario: dict[str, dict[str, int | float]], nombre: str, precio: float
+) -> None:
     inventario[nombre]["precio"] = precio
 
 
 def calcular_valor_inventario(inventario: dict[str, dict[str, int | float]]) -> float:
-    return sum(datos["precio"] * datos["cantidad"]
-               for datos in inventario.values())
+    return sum(datos["precio"] * datos["cantidad"] for datos in inventario.values())
 
 
 if __name__ == "__main__":
