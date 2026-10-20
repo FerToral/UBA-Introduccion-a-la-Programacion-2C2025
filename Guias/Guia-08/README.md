@@ -1,21 +1,33 @@
-# Guía 8 — Pilas, colas y diccionarios
+# Guía 8 · Pilas, colas, diccionarios y archivos
 
-Operaciones sobre tipos abstractos de datos: recorridos de pilas y colas, balanceo de paréntesis, evaluación de expresiones postfijas, bingo, atención por prioridades, promedios e inventario.
+[guia8.py](src/guia8.py) contiene los ejercicios1–18; [archivos.py](src/archivos.py),19–27. [Pruebas](tests).
 
-## Contenido
+| Actividades | Contenido |
+|---|---|
+| 1–4 | Pila aleatoria, tamaño sin qsize, máximo y tupla con nota máxima; las consultas restauran la entrada. |
+| 5–7 | Paréntesis balanceados mediante pila; expresiones postfijas con enteros y + − * /; intercalación con tope de la segunda pila. Entradas de igual tamaño. |
+| 8–12 | Equivalentes con cola: azar, tamaño sin qsize, máximo, nota mínima e intercalación comenzando por la primera cola. |
+| 13 | Bolillero con los cien valores0…99 sin repetir; mínimo de extracciones para completar un cartón de doce números. Se conserva el bolillero de entrada. |
+| 14–15 | Prioridad hospitalaria menor que4; atención bancaria estable: prioridad personal, luego cuenta preferencial y luego resto. |
+| 16 | Diccionario de promedios por nombre; no confundir la función en memoria con la exportación CSV del27. |
+| 17–18 | Historial por usuario mediante pilas e inventario anidado con precio/cantidad, actualización y valoración total. |
+| 19 | Cantidad de líneas; existencia y conteo de una secuencia literal no vacía. Se cuentan también coincidencias solapadas. |
+| 20–21 | Agrupar palabras por longitud y palabra más frecuente; tokens delimitados por blancos, sin normalizar puntuación/mayúsculas. Empate por primera aparición. |
+| 22–23 | Clonar omitiendo comentarios de línea completa e invertir el orden de líneas. |
+| 24–25 | Agregar una frase de una sola línea al final o al principio del archivo original. |
+| 26 | Extraer secuencias ASCII de letras, dígitos, espacios o guion bajo, de longitud≥5, desde bytes. |
+| 27 | CSV de cuatro columnas LU,materia,fecha,nota → CSV LU,promedio. Sin encabezado; lector CSV admite campos entrecomillados. |
 
-- [`src/guia8.py`](src/guia8.py): implementaciones de los ejercicios 1–18.
-- [`tests/test_guia8.py`](tests/test_guia8.py): 9 pruebas que agrupan los casos de pilas, colas y diccionarios.
+## Archivos y datos
 
-Se utilizan `queue.LifoQueue` y `queue.Queue` de la biblioteca estándar. Las operaciones de consulta restauran las estructuras recibidas. La intercalación supone entradas del mismo tamaño y las consultas de extremos suponen estructuras no vacías.
+El texto se procesa como UTF-8. En comentarios sólo se admiten espacios antes de #; un # posterior a texto se conserva. Invertir líneas escribe separadores LF y evita pegar dos líneas cuando la última no tenía salto final. Agregar al final crea el separador que falte; no agrega una línea vacía innecesaria.
 
-Los ejercicios 19–27, correspondientes a archivos, están pendientes y no forman parte del código incluido.
+La exportación de promedios rechaza entrada/salida iguales antes de escribir. Todos los tests de archivos operan en un directorio temporal con datos ficticios: no leen evaluaciones de estudiantes reales ni binarios del equipo.
 
-## Consigna y teoría
+## Tipos abstractos
 
-- [Guía 8 — p8.pdf](https://campus.exactas.uba.ar/pluginfile.php/158623/mod_resource/content/4/p8.pdf).
-- [Teórico 8 — Programación Imperativa: Arreglos, Listas, Pilas y Colas](https://campus.exactas.uba.ar/pluginfile.php/140171/mod_resource/content/13/t08-handout.pdf).
-- [Teórico 9 — +TADs & Debugging](https://campus.exactas.uba.ar/pluginfile.php/140167/mod_resource/content/14/t09-handout.pdf).
-- [Campus de la cursada, segundo cuatrimestre de 2025](https://campus.exactas.uba.ar/course/view.php?id=674).
+Se emplean Queue/LifoQueue de la biblioteca estándar. Las operaciones in restauran el contenido y orden; las inout modifican sólo lo especificado. Máximos/notas requieren estructura no vacía. La ejecución es secuencial, sin consumidores concurrentes.
 
-Las referencias corresponden al material de la materia y pueden requerir una sesión del campus.
+Fuente: guía8 del campus674, compilada14/10/2025; teoría vinculada: TAD, diccionarios, entrada/salida y debugging. El PDF docente permanece en respaldo; las descripciones locales permiten seguir las actividades sin iniciar sesión.
+
+Desde la raíz: `python herramientas/comprobar.py --python`.
