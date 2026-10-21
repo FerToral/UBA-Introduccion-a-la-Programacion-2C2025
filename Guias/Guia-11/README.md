@@ -26,31 +26,33 @@ Para n≥0: ciclo **5n+4**, fórmula **5**, recursión **4n+2**. En la fórmula 
 
 Con el mismo modelo y n≥0:
 
-| Versión del enunciado | Iteraciones / T(n) | Orden |
-|---|---|---|
-| 0 | Un producto, asignación y retorno: 3 | Θ(1) |
-| 1 | n vueltas: 5n+4 | Θ(n) |
-| 2 | k=⌈n/2⌉ vueltas: 5k+4 | Θ(n) |
-| 3 | Doble ciclo: 6n²+5n+4 | Θ(n²) |
-| 4 | Triple ciclo: 7n³+5n²+5n+4 | Θ(n³) |
-| 5 | k=0 si n≤1, si no ⌈log₂n⌉: 5k+4 | Θ(log n) |
-| 6 | 2^n recorridos de n posiciones; cambian constantes según los bits | Θ(n·2^n) |
+| Versión del enunciado | Iteraciones / T(n)                                                | Orden    |
+| --------------------- | ----------------------------------------------------------------- | -------- |
+| 0                     | Un producto, asignación y retorno: 3                              | Θ(1)     |
+| 1                     | n vueltas: 5n+4                                                   | Θ(n)     |
+| 2                     | k=⌈n/2⌉ vueltas: 5k+4                                             | Θ(n)     |
+| 3                     | Doble ciclo: 6n²+5n+4                                             | Θ(n²)    |
+| 4                     | Triple ciclo: 7n³+5n²+5n+4                                        | Θ(n³)    |
+| 5                     | k=0 si n≤1, si no ⌈log₂n⌉: 5k+4                                   | Θ(log n) |
+| 6                     | (10n+9)·2^n+5; ambas ramas del bit tienen el mismo costo unitario | Θ(n·2^n) |
 
 Son conteos bajo costo unitario: los productos enormes y las potencias pueden dominar el tiempo real. No se ejecuta un experimento exponencial sin límite para ilustrar una fórmula.
 
 ## 5 · Comparación de implementaciones
 
-| Problema | Comparación y resolución |
-|---|---|
-| Máxima diferencia | Todos los pares: Θ(n²); máximo y mínimo por separado: Θ(n); ambos en una pasada: Θ(n), menor constante. Requiere lista no vacía para las variantes que indexan s[0]. |
-| Suma de productos | n² pares con prueba i≠j frente a n(n−1)/2 pares i<j: ambos Θ(n²). Los programas suman **pares sin orden**, pese a la ambigüedad de la especificación; el módulo lo explicita. |
-| Posiciones pares | Examinar n índices o recorrer sólo ⌈n/2⌉: ambos Θ(n); la segunda evita decisiones internas. |
-| Multiplicar por índice | Sumas repetidas: Σi=n(n−1)/2, Θ(n²); producto directo por posición: Θ(n). Modifica la misma lista. |
-| Diagonal principal | Recorrer toda la matriz n×n: Θ(n²); consultar m[i][i]: Θ(n). |
-| Identidad | Ambas variantes escriben n² posiciones: Θ(n²); cambia el trabajo de la rama, no el orden. |
-| Suma matricial | Para r×c, las tres variantes son Θ(rc). La que guarda sumas de filas necesita O(r) extra y debe inicializar la lista auxiliar: el código del PDF omite esa inicialización. Aquí se acumula directamente. |
+| Problema               | Comparación y resolución                                                                                                                                                                                 |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Máxima diferencia      | Todos los pares: Θ(n²); máximo y mínimo por separado: Θ(n); ambos en una pasada: Θ(n), menor constante. Requiere lista no vacía para las variantes que indexan s[0].                                     |
+| Suma de productos      | n² pares con prueba i≠j frente a n(n−1)/2 pares i<j: ambos Θ(n²). Los programas suman **pares sin orden**, pese a la ambigüedad de la especificación; el módulo lo explicita.                            |
+| Posiciones pares       | Examinar n índices o recorrer sólo ⌈n/2⌉: ambos Θ(n); la segunda evita decisiones internas.                                                                                                              |
+| Multiplicar por índice | Sumas repetidas: Σi=n(n−1)/2, Θ(n²); producto directo por posición: Θ(n). Modifica la misma lista.                                                                                                       |
+| Diagonal principal     | Recorrer toda la matriz n×n: Θ(n²); consultar m[i][i]: Θ(n).                                                                                                                                             |
+| Identidad              | Ambas variantes escriben n² posiciones: Θ(n²); cambia el trabajo de la rama, no el orden.                                                                                                                |
+| Suma matricial         | Para r×c, las tres variantes son Θ(rc). La que guarda sumas de filas necesita O(r) extra y debe inicializar la lista auxiliar: el código del PDF omite esa inicialización. Aquí se acumula directamente. |
 
-Los conteos exactos de variantes con `mayor`/`menor` dependen de si se cuenta el cuerpo de cada llamada y del resultado de sus decisiones; estas comparaciones expresan el número de recorridos y el orden, no una constante universal.
+Los [conteos completos de 4–6](CONTEOS.md) fijan el costo de las auxiliares,
+incluyen cada rama y comparación final, y derivan T(n) exacto. Las expresiones
+dependientes de los datos se verifican con [cuentas.py](src/cuentas.py).
 
 ## 6 · Mejor y peor caso
 
